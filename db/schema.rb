@@ -10,20 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919183403) do
+ActiveRecord::Schema.define(version: 20170920142005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "wishes", force: :cascade do |t|
-    t.string "item_name"
-    t.string "item_description"
-    t.string "item_link"
-    t.string "item_rank"
-    t.string "item_image"
-    t.string "item_price"
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "wishes", force: :cascade do |t|
+    t.string "item_name"
+    t.text "item_description"
+    t.string "item_link"
+    t.string "item_rank"
+    t.text "item_image"
+    t.string "item_price"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
 end
