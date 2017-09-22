@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 			post '/login', to: 'auth#create'
 			post '/wishes', to: 'wishes#create'
 			get '/wishes', to: 'wishes#index'
+			post '/searches', to: 'searches#create'
 			get '/me', to: 'users#me'
     	end
     end
