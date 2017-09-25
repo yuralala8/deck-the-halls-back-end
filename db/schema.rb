@@ -23,11 +23,10 @@ ActiveRecord::Schema.define(version: 20170920142005) do
   end
 
   create_table "wishes", force: :cascade do |t|
-    t.string "item_name"
-    t.text "item_description"
+    t.string "item_description"
     t.string "item_link"
     t.string "item_rank"
-    t.text "item_image"
+    t.string "item_image"
     t.string "item_price"
     t.bigint "user_id"
     t.datetime "created_at", null: false
