@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 			post '/wishes/:id', to: 'wishes#destroy'
 			post '/searches', to: 'searches#create'
 			get '/searches', to: 'searches#index'
+			post '/friendships', to: 'friendships#create'
+			get '/requests/:id', to: 'friendships#pending_requests'
+			post '/accept', to: 'friendships#accept'
+			get '/friendships/:id', to: 'friendships#completed_requests'
 			get '/me', to: 'users#me'
     	end
     end
