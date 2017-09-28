@@ -3,7 +3,7 @@ class Api::V1::SearchesController < ApplicationController
   before_action :authorized, only: [:index,:create]
   
   def index
-    users = User.all.map{|user| {"id": user.id, "username": user.username}}
+    users = User.all.map{|user| {"id": user.id, "username": user.username, "propic": user.pro_pic, "bio": user.bio}}
 
     render json: users
 

@@ -21,4 +21,17 @@ class Api::V1::UsersController < ApplicationController
     render json: current_user
   end
 
+  def info
+    @current_user = current_user
+    @current_user[:bio] = params[:userInfo][:userBio]
+    @current_user[:pro_pic] = params[:userInfo][:profileImage]
+    @current_user.save
+    
+   render json: @current_user
+  end
+
+  def all_info
+
+  end
+
 end

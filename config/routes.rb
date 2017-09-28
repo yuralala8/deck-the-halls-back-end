@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 			post '/accept', to: 'friendships#accept'
 			get '/friendships/:id', to: 'friendships#completed_requests'
 			get '/me', to: 'users#me'
+			post '/userinfo', to: 'users#info'
     	end
     end
 end
