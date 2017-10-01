@@ -4,5 +4,5 @@ class User < ApplicationRecord
 	has_many :friendships
 	has_many :friends, :through => :friendships
 	has_many :users_parties
-	has_many :parties, :through => :user_parties
+	has_many :parties, :through => :users_parties
 end

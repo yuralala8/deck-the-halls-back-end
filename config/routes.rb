@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 			get '/requests/:id', to: 'friendships#pending_requests'
 			post '/accept', to: 'friendships#accept'
 			get '/friendships/:id', to: 'friendships#completed_requests'
+			post '/parties', to: 'parties#create'
+			get '/parties', to: 'parties#index'
 			get '/me', to: 'users#me'
 			post '/userinfo', to: 'users#info'
     	end
