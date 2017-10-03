@@ -42,5 +42,15 @@ class Api::V1::FriendshipsController < ApplicationController
     render json: @friendships
   end
 
+  def destroy
+
+    @friendship = Friendship.find_by(user_id: params[:friendId], friend_id: params[:currentUser])
+    @friendship.destroy
+
+    @friendships = Friendship.all
+
+    render json: @friendships
+  end
+
 
 end

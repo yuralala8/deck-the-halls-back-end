@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 			post '/friendships', to: 'friendships#create'
 			get '/requests/:id', to: 'friendships#pending_requests'
 			post '/accept', to: 'friendships#accept'
+			post '/delete', to: 'friendships#destroy'
 			get '/friendships/:id', to: 'friendships#completed_requests'
 			post '/parties', to: 'parties#create'
 			get '/parties', to: 'parties#index'

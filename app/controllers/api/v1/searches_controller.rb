@@ -15,9 +15,7 @@ class Api::V1::SearchesController < ApplicationController
     queryParams = ENV["apikey"]
     
     url = "https://api.shop.com/sites/v1/search/Term/" + searchTerm + queryParams
-
     results = JSON.parse(RestClient.get(url))
-
     render json: results
 
   end

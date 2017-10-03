@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170929210711) do
     t.string "location"
     t.datetime "date"
     t.string "amount"
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,10 +50,10 @@ ActiveRecord::Schema.define(version: 20170929210711) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+    t.string "pro_pic"
+    t.string "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "bio"
-    t.string "pro_pic"
   end
 
   create_table "users_parties", force: :cascade do |t|
