@@ -22,12 +22,14 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def info
-    @current_user = current_user
-    @current_user[:bio] = params[:userInfo][:userBio]
-    @current_user[:pro_pic] = params[:userInfo][:profileImage]
-    @current_user.save
-    
-   render json: @current_user
+    @me = current_user
+    @me[:bio] = params[:userInfo][:userBio]
+    @me.save
+    @me[:pro_pic] = params[:userInfo][:profileImage]
+    @me.save
+
+    @users = User.all.map{|user| {"id": user.id, "username": user.username, "propic": user.pro_pic, "bio": user.bio}}
+   render json: {me: @me, users: @users}
   end
 
   def all_info

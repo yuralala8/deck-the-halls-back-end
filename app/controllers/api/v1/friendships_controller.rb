@@ -17,9 +17,12 @@ class Api::V1::FriendshipsController < ApplicationController
   	my_username = User.find(@friendship.user_id).username
   	friends_username = User.find(@friendship.friend_id).username
 
+    @friendships = Friendship.select{|relation| relation.status == "pending"}
+    @pending_sent = @friendships.select{|f| f.user_id.to_s == params[:currentUser]}
+
   	requestProcess = {friendship_id: @friendship.id, current_user: {user_id: params[:currentUser], username: my_username}, friend: {friend_id: params[:friendId], username: friends_username}}
   	
-  	render json: requestProcess
+  	render json: {this_request: requestProcess, pending_sent: @pending_sent}
   end
 
   def completed_requests
@@ -30,16 +33,20 @@ class Api::V1::FriendshipsController < ApplicationController
   end
 
   def accept
+
     @friendship = Friendship.new(user_id: params[:currentUser], friend_id: params[:friendId], status: "complete")
     @friendship.save
 
     change_status_of = Friendship.find_by(user_id: params[:friendId], friend_id: params[:currentUser])
     change_status_of.status = "complete"
     change_status_of.save
+
+    @friendships = Friendship.select{|relation| relation.status == "pending"}
+    @pending_received = @friendships.select{|f| f.friend_id.to_s == params[:id]}
   
     @friendships = Friendship.all
 
-    render json: @friendships
+    render json: {all_friendships: @friendships, pending_received: @pending_received}
   end
 
   def destroy
@@ -47,9 +54,10 @@ class Api::V1::FriendshipsController < ApplicationController
     @friendship = Friendship.find_by(user_id: params[:friendId], friend_id: params[:currentUser])
     @friendship.destroy
 
-    @friendships = Friendship.all
+    @friendships = Friendship.select{|relation| relation.status == "pending"}
+    @pending_received = @friendships.select{|f| f.friend_id.to_s == params[:id]}
 
-    render json: @friendships
+    render json: @pending_received
   end
 
 
