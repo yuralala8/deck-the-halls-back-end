@@ -9,7 +9,6 @@ class Api::V1::WishesController < ApplicationController
   # end
 
   def create
-    
     # user_id: current_user[:id], item_description: params[:item_description], item_link: params[:item_link], item_rank: params[:item_rank], item_image: params[:item_image], item_price: params[:item_price]
   	@wish = Wish.new(wish_params)
     @wish.user = current_user
