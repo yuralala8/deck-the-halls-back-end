@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 			get '/friendships/:id', to: 'friendships#completed_requests'
 			post '/parties', to: 'parties#create'
 			get '/parties', to: 'parties#index'
+			post '/parties/:id', to: 'parties#destroy'
 			get '/me', to: 'users#me'
 			post '/userinfo', to: 'users#info'
     	end

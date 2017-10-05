@@ -33,5 +33,21 @@ class Api::V1::PartiesController < ApplicationController
   
   	render json: party
   end
+
+  def destroy
+    @party = Party.find(params[:id])
+    @party.destroy()
+
+    @santa = SantaOrganizer.select{|santa| santa.party_id.to_s == params[:id]}
+    @santa.each{|party| party.destroy}
+
+    my_parties = current_user.parties
+    parties = my_parties.map do |party| 
+      {info: party, participants: party.users.map{|user| {username: user.username, id: user.id}}, matches: party.santa_organizers}
+    end
+
+    render json: parties
+
+  end
   
 end
