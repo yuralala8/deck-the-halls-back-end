@@ -8,6 +8,7 @@ class Api::V1::AuthController < ApplicationController
       render json: {user: user, jwt: token}
       # a user exists and I can authenticate a user so successs
     else
+      render json: {error: "Invalid username or password"}
     end
   end
 end
