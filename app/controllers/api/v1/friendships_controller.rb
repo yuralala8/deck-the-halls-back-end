@@ -28,7 +28,7 @@ class Api::V1::FriendshipsController < ApplicationController
   def completed_requests
     @friends = Friendship.select{|friend| friend.status == "complete" && friend.user_id.to_s == params[:id]}
     my_friends = @friends.map{|relation| relation.friend_id}
-    friends_list = my_friends.map{|num| User.all.find{|user| user.id == num}}
+    friends_list = my_friends.map{|num| User.all.find{|user| user.id == num}}.compact
     render json: friends_list
   end
 
